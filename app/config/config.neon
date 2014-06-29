@@ -1,0 +1,34 @@
+#
+# SECURITY WARNING: it is CRITICAL that this file & directory are NOT accessible directly via a web browser!
+#
+# If you don't protect this directory from direct web access, anybody will be able to see your passwords.
+# http://nette.org/security-warning
+#
+parameters:
+
+
+php:
+	date.timezone: Europe/Prague
+
+
+nette:
+	application:
+		mapping:
+			*: App\*Module\Presenters\*Presenter
+
+	session:
+		expiration: 14 days
+
+	database:
+		dsn: "sqlite:%appDir%/data/database.db"
+
+
+services:
+	- App\RouterFactory
+	router: @App\RouterFactory::createRouter
+
+	- App\Model\CertificatesService
+	- App\Model\DomainsService(%servers%)
+	- App\Model\MiscService
+	- App\Model\UsersService
+	- App\Model\PasswordEncoder

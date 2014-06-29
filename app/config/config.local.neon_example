@@ -1,0 +1,15 @@
+parameters:
+	https: off
+	servers:
+		- {
+			host: proxy1.example.com
+			port: 22
+			user: user
+			password: pass
+		}
+		- {
+			host: proxy2.example.com
+			port: 22
+			user: user
+			password: pass
+		}

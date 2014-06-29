@@ -1,0 +1,61 @@
+{block content}
+	<div class="col-md-12">
+		{form form}
+			<div class="alert alert-danger" n:foreach="$form->errors as $error">{$error}</div>
+
+			<div class="form-group">
+				{input domain, class => 'form-control', placeholder => 'Domain'}
+			</div>
+
+			<div class="form-group">
+				{input target, class => 'form-control', placeholder => 'Target'}
+			</div>
+
+			<div class="form-group">
+				{input cert, class => 'form-control'}
+			</div>
+
+			<div class="checkbox">
+				{input wildcard}
+			</div>
+
+			{input send, class => 'btn btn-default'}
+			<a n:href="Dashboard:" class="cancel">Cancel</a>
+		{/form}
+	</div>
+
+	<div class="col-md-12">
+		{if !count($domains)}
+			<p class="alert alert-info">No domains found</p>
+		{else}
+			<table class="table table-bordered table-hover">
+				<thead>
+					<tr>
+						<th>Domain</th>
+						<th>Target</th>
+						<th>Certificate</th>
+						<th>Wildcard</th>
+						<th>Action</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr n:foreach="$domains as $domain">
+						<td>{$domain->domain}</td>
+						<td>{$domain->target}</td>
+						<td>{$domain->certificate ? $domain->certificate->name : 'No'}</td>
+						<td>{$domain->wildcard ? 'Yes' : 'No'}</td>
+						<td>
+							{if $domain->need_remove}
+								Being be removed soon
+							{else}
+								<a n:href="edit!, $domain->id">Edit</a>
+								or
+								<a n:href="remove!, $domain->id" onclick="return confirm('Are you sure?')">Remove</a>
+							{/if}
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		{/if}
+	</div>
+{/block}

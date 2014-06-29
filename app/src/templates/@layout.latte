@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+	<head>
+		<link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet"/>
+		<link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.1.1/css/bootstrap-theme.min.css" rel="stylesheet"/>
+		<style>
+			.cancel { padding-left: 5px; }
+			.page-header h1 { float: left; margin-right: 10px; }
+			.page-header a.btn { float: left; margin: 25px 0 0 10px; }
+			.col-md-12 { margin-bottom: 20px; }
+			.col-md-12:first-child { margin-bottom: 0; }
+			.last-update { margin: 32px 5px 0 0; float: right; }
+			.user-info { margin: 32px 5px 0 0; float: right; }
+			input[type=file] { float: left }
+			.crts label { float: left; margin-right: 20px; }
+		</style>
+		<title>Proxy manager</title>
+	</head>
+	<body class="container">
+		<div class="page-header clearfix">
+			<h1>Proxy manager</h1>
+			{if $user->loggedIn}
+				{if $presenter->name == 'Dashboard'}
+					<a n:href="Certificates:" class="btn btn-primary">Manage SSL certificates</a>
+				{else}
+					<a n:href="Dashboard:" class="btn btn-primary">Back to dashboard</a>
+				{/if}
+				<span class="user-info">
+					Logged as {$user->identity->login} -
+					<a n:href="logout!">logout</a>
+				</span>
+				<span class="last-update">Last update: {$lastUpdate|date:'j.n.Y H:i'} |</span>
+			{/if}
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="alert alert-{$flash->type}" n:foreach="$flashes as $flash">{$flash->message}</div>
+			</div>
+
+			{include #content}
+		</div>
+	</body>
+</html>
