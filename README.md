@@ -17,3 +17,4 @@ Requirements
 1. PHP 5.4
 2. sqlite3 extension
 3. ssh2 extension
+4. CLI CRON on /cron (for configuration's distribution)
